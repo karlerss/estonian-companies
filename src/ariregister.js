@@ -25,9 +25,9 @@ export default class Ariregister {
         db.collection('Company').insertMany(data, (err, r) => {
             if (err) console.log(err);
             db.ensureIndex('Company', {name: 'text'}, {name: 'name_text_index'}, function () {
-                db.close();
+                console.log('Text index created!')
             });
-            console.log('OK2');
+            console.log('Data inserted!');
             cb(err, r);
         });
     };

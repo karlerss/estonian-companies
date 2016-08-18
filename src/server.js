@@ -2,7 +2,7 @@
 
 //var Ariregister = require('./ariregister.js');
 
-import Ariregister from './Ariregister';
+import Ariregister from './ariregister';
 import express from 'express';
 import mongodb from 'mongodb';
 
@@ -14,7 +14,7 @@ mongodb.MongoClient.connect("mongodb://mongo:27017/test", function (err, databas
     if (err) throw err;
     db = database;
     app.listen(3002);
-    console.log("Listening on port 3000");
+    console.log("Listening on port 3002");
 });
 
 app.all('*', function (req, res, next) {
@@ -32,7 +32,6 @@ app.get('/company', function (req, res) {
             "$search": query
         }
     }, {limit: 20}).toArray((err, resp) => {
-        console.log(err, resp);
         res.json(resp)
     });
 

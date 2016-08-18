@@ -8,4 +8,4 @@ RUN npm install
 ADD . .
 ENV BABEL_DISABLE_CACHE 1
 RUN npm run build
-CMD ["node","."]
+CMD ["node",".", "--harmony"]
