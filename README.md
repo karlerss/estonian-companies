@@ -46,4 +46,4 @@ $scope.getCompany = function (filter) {
 
 ## Hosted version
 
-This software is hosted at. company.lehter.com. [Check it out](http://company.lehter.com/company?q=123).
+This software is hosted at company.lehter.com. [Check it out](http://company.lehter.com/company?q=123).
