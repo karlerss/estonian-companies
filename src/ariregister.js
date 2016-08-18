@@ -21,12 +21,9 @@ export default class Ariregister {
 
     }
 
-    insertData(db, data, cb) {
+    insertData(db, data, cb = (err, cb) => {}) {
         db.collection('Company').insertMany(data, (err, r) => {
             if (err) console.log(err);
-            db.ensureIndex('Company', {name: 'text'}, {name: 'name_text_index'}, function () {
-                console.log('Text index created!')
-            });
             console.log('Data inserted!');
             cb(err, r);
         });
@@ -38,31 +35,42 @@ export default class Ariregister {
         })
     }
 
+    makeIndex(db, cb){
+        db.ensureIndex('Company', {name: 'text'}, {name: 'name_text_index'}, function () {
+            console.log('Text index created!')
+        });
+    }
+
     importCompanies(cb) {
         let me = this;
         mongodb.MongoClient.connect(this.options.dbConnStr, (err, db) => {
             if (err) console.log(err);
             me.dropData(db, () => {
-                me.getData((err, data) => {
-                    if (err) console.log(err);
-                    me.insertData(db, data, cb);
+                me.getData(db, (err, data) => {
+                    console.log('getData returned')
                 });
             });
         });
 
 
-
     };
 
-    getData(cb) {
+    getData(db, cb) {
+        let me = this;
         let rq = http.get(this.options.csvZipUrl, (res) => {
             let parser = parse(this.options.parserOpts);
-            let output = [];
+            let counter = 1;
+            let buffer = [];
 
             parser.on('readable', () => {
                 var record;
                 while (record = parser.read()) {
-                    output.push(record);
+                    buffer.push(record);
+                    counter++;
+                    if(counter%1000==0){
+                        me.insertData(db, buffer);
+                        buffer = [];
+                    }
                 }
             });
 
@@ -70,7 +78,7 @@ export default class Ariregister {
                 cb(err, null);
             });
             parser.on('finish', () => {
-                cb(null, output);
+                me.makeIndex(db, cb(null, null));
             });
 
             res.pipe(unzip.Parse()).on('entry', (entry) => {

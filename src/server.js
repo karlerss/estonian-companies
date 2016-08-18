@@ -5,10 +5,16 @@
 import Ariregister from './ariregister';
 import express from 'express';
 import mongodb from 'mongodb';
+import util from 'util';
+import process from 'process';
 
 var ar = new Ariregister();
 var app = express();
 var db;
+
+setInterval(() => {
+    console.log(util.inspect(process.memoryUsage()));
+}, 1000);
 
 mongodb.MongoClient.connect("mongodb://mongo:27017/test", function (err, database) {
     if (err) throw err;
