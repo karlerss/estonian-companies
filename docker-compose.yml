@@ -3,6 +3,6 @@ web:
   links:
     - mongo
   ports:
-    - "3002"
+    - "3002:3002"
 mongo:
   image: mongo

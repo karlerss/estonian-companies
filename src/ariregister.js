@@ -16,7 +16,7 @@ export default class Ariregister {
                     'locationEhak', 'postalCode', 'adsAdrId', 'adsAdsOid', 'adsNormalAddress', 'link']
             },
             csvZipUrl: 'http://avaandmed.rik.ee/andmed/ARIREGISTER/ariregister_csv.zip',
-            dbConnStr: 'mongodb://localhost:27017/test'
+            dbConnStr: 'mongodb://mongo:27017/test'
         };
 
     }

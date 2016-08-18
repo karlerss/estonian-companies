@@ -10,7 +10,7 @@ var ar = new Ariregister();
 var app = express();
 var db;
 
-mongodb.MongoClient.connect("mongodb://localhost:27017/test", function (err, database) {
+mongodb.MongoClient.connect("mongodb://mongo:27017/test", function (err, database) {
     if (err) throw err;
     db = database;
     app.listen(3002);
@@ -36,6 +36,10 @@ app.get('/company', function (req, res) {
         res.json(resp)
     });
 
+});
+
+ar.importCompanies(() => {
+    console.log('File downloaded');
 });
 
 // update every week
