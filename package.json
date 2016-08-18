@@ -1,0 +1,31 @@
+{
+  "name": "company-api",
+  "version": "1.0.0",
+  "description": "A small app to fetch data from Estonian business registry and expose data via web api.",
+  "main": "lib/server.js",
+  "dependencies": {
+    "csv-parse": "^1.1.7",
+    "express": "^4.14.0",
+    "jszip": "^3.1.1",
+    "mongodb": "^2.2.6",
+    "node-zip": "^1.1.1",
+    "request": "^2.74.0",
+    "unzip": "^0.1.11"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.13.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --presets babel-preset-es2015 --out-dir lib"
+  },
+  "keywords": [
+    "eesti",
+    "äriregister",
+    "ettevõtted",
+    "api"
+  ],
+  "author": "Karl-Sander Erss",
+  "license": "MIT"
+}
