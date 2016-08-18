@@ -12,9 +12,11 @@ var ar = new Ariregister();
 var app = express();
 var db;
 
+/*
 setInterval(() => {
     console.log(util.inspect(process.memoryUsage()));
 }, 1000);
+*/
 
 mongodb.MongoClient.connect("mongodb://mongo:27017/test", function (err, database) {
     if (err) throw err;
